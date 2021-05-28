@@ -1,7 +1,7 @@
 function CandidatesViewModeSelect(props) {
     return (
         <button
-            className="btn btn-outline-secondary"
+            className="btn btn-outline-dark"
             onClick={props.onSetCandidatesViewMode}
         >
             Candidates
