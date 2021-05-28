@@ -3,7 +3,9 @@ function MatchesViewModeSelect(props){
         <button
             className="btn btn-outline-success"
             onClick={props.onSetMatchesViewMode} 
-        />
+        >
+            Matches
+        </button>
     )
 }
 
