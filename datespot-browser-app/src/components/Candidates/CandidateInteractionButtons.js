@@ -1,4 +1,4 @@
-function CandidateInteractionButtons() {
+function CandidateInteractionButtons(props) {
     return (
         <div className="btn-group" role="group">
         <button
@@ -8,6 +8,7 @@ function CandidateInteractionButtons() {
         </button>
         <button
             className="btn btn-secondary"
+            onClick={props.onGetNextCandidate}
         >
             Pass
         </button>

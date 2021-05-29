@@ -8,8 +8,12 @@ export class Candidates extends React.Component{
     render() {
         return(
             <div>
-                <CandidateInfo />
-                <CandidateInteractionButtons />
+                <CandidateInfo
+                    candidate={this.props.candidate}
+                />
+                <CandidateInteractionButtons
+                    onGetNextCandidate={this.props.onGetNextCandidate}
+                />
             </div>
         )
     }

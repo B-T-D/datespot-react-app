@@ -1,6 +1,9 @@
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
+import { apiUrlRoot, axiosInstance } from '../../axiosUtil';
+
+
 import { Nav } from '../Nav/Nav';
 import { Candidates } from '../Candidates/Candidates';
 import { Matches } from '../Matches/Matches';
@@ -9,20 +12,24 @@ import Container from 'react-bootstrap/Container';
 
 const MAX_LATLON_COORD_DECIMAL_PLACES = 8;
 
+const apiUrlCandidates = apiUrlRoot + 'candidates/';
+
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             viewMode: 'candidates',
             user: '',
-            currentLocation: [0.0, 0.0]
+            currentLocation: [0.0, 0.0],
+            candidate: "no candidate"
         };
 
         // Method binds
         this.setCandidatesViewMode = this.setCandidatesViewMode.bind(this);
         this.setMatchesViewMode = this.setMatchesViewMode.bind(this);
         this.setCurrentLocation = this.setCurrentLocation.bind(this);
-        // this.refreshLocation = this.refreshLocation.bind(this);
+        
+        this.getNextCandidate = this.getNextCandidate.bind(this);
 
         //  TODO placeholder
     }
@@ -40,13 +47,6 @@ class App extends React.Component {
             {viewMode: 'matches'}
         )
     }
-
-    // setCurrentLocation() {
-    //     this.setState(
-    //         {currentLocation: this.refreshLocation()}
-    //     )
-    //     console.log(`in set current location: state is now ${JSON.stringify(this.state)}`)
-    // }
 
     setCurrentLocation() { // TODO get it from the location API and update it in state
         if (navigator.geolocation) {
@@ -68,11 +68,28 @@ class App extends React.Component {
         }
     }
 
-
     /*
     TODO see also Geolocation.watchPosition() to update automatically each time device's position 
     changes. https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
     */
+
+    // API data CRUD methods
+
+    getNextCandidate() {
+        alert(`getNextCandidate() called.\napiUrlCandidates = ${apiUrlCandidates}`)
+        axiosInstance
+        .get(apiUrlCandidates)
+        .then(response => {
+            alert(`response.data = ${JSON.stringify(response.data)}`)
+            this.setState({
+                candidate: response.data
+            });
+        })
+        .catch(error => {
+            alert(`caught error`);
+            console.log(`getNextCandidate HTTP request caught an error: ${JSON.stringify(error)}`);
+        })
+    }
 
     render() {
         return (
@@ -88,6 +105,8 @@ class App extends React.Component {
                 <div>
                     {this.state.viewMode === 'candidates' ?
                         <Candidates
+                            candidate={this.state.candidate}
+                            onGetNextCandidate={this.getNextCandidate}
                         />
                         :
                         <Matches
