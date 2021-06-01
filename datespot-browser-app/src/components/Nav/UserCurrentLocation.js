@@ -4,13 +4,13 @@ function UserCurrentLocation(props) {
             <div className="btn-toolbar" role="toolbar">
                 <div className="btn-group mr-2" role="group">
                     <button className = "btn btn-secondary">
-                        {props.currentLocation[0]}
+                        {props.location.latitude}
                     </button> 
                     <button className ="btn btn-secondary">
                         ,
                     </button>
                     <button className = "btn btn-secondary">
-                        {props.currentLocation[1]}
+                        {props.location.longitude}
                     </button> 
                 </div>
                 <div className="btn-group mr-2" role="group">

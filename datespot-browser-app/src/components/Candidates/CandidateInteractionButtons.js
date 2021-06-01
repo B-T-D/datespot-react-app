@@ -3,6 +3,7 @@ function CandidateInteractionButtons(props) {
         <div className="btn-group" role="group">
         <button
             className= "btn btn-danger"
+            onClick={() => {props.onDecision(false)}}
         >
             No
         </button>
@@ -14,6 +15,7 @@ function CandidateInteractionButtons(props) {
         </button>
         <button
             className="btn btn-success"
+            onClick={ () => {props.onDecision(true)}}
         >
             Yes
         </button>

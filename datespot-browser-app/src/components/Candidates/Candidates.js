@@ -13,6 +13,7 @@ export class Candidates extends React.Component{
                 />
                 <CandidateInteractionButtons
                     onGetNextCandidate={this.props.onGetNextCandidate}
+                    onDecision={this.props.onDecision}
                 />
             </div>
         )

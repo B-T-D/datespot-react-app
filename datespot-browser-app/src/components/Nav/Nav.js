@@ -2,7 +2,7 @@ import React from 'react';
 
 import MatchesViewModeSelect from './MatchesViewModeSelect';
 import CandidatesViewModeSelect from './CandidatesViewModeSelect';
-import UserCurrentLocation from './UserCurrentLocation';
+import { UserInfo } from './UserInfo';
 
 export class Nav extends React.Component{
     render() {
@@ -14,8 +14,9 @@ export class Nav extends React.Component{
                 <MatchesViewModeSelect
                     onSetMatchesViewMode={this.props.onSetMatchesViewMode}
                 />
-                <UserCurrentLocation 
-                    currentLocation = {this.props.currentLocation}
+                <UserInfo
+                    user={this.props.user}
+                    location = {this.props.location}
                     onRefreshLocation={this.props.onRefreshLocation}
                 />
             </div>
